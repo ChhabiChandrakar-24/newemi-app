@@ -1,0 +1,20 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Block access to sensitive files and directories
+    RewriteRule ^\.env - [F,L,NC]
+    RewriteRule ^composer\.(json|lock) - [F,L,NC]
+    RewriteRule ^package(-lock)?\.json - [F,L,NC]
+    RewriteRule ^artisan - [F,L,NC]
+    RewriteRule ^(app|bootstrap|config|database|resources|routes|storage|tests|vendor)(/.*)?$ - [F,L,NC]
+
+    # Forward all traffic to the public directory
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Fallback: deny sensitive files directly if mod_rewrite is disabled
+<FilesMatch "^\.env|composer\.(json|lock)|package(-lock)?\.json|artisan">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

@@ -1,0 +1,31 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  
+  # Ensure index.html is not cached so new builds load immediately
+  <Files "index.html">
+    <IfModule mod_headers.c>
+      Header set Cache-Control "no-cache, no-store, must-revalidate"
+      Header set Pragma "no-cache"
+      Header set Expires 0
+    </IfModule>
+  </Files>
+
+  # Cache static assets with content hash for 1 year
+  <IfModule mod_headers.c>
+    <FilesMatch "\.(css|js|svg|png|jpg|jpeg|gif|webp|woff|woff2|ttf|eot)$">
+      Header set Cache-Control "max-age=31536000, public, immutable"
+    </FilesMatch>
+    
+    # Security headers
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+  </IfModule>
+
+  # Route all non-file/non-directory requests to index.html (SPA Fallback)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.html [L]
+</IfModule>

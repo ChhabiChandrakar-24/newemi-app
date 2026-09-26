@@ -1,0 +1,137 @@
+
+   PASS  Tests\Unit\EmiScheduleGeneratorTest
+  ✓ money conversion preserves paise exactly                                                                     0.22s  
+  ✓ generator allocates remainder and handles month end                                                          0.04s  
+
+   PASS  Tests\Unit\ExampleTest
+  ✓ that true is true                                                                                            0.02s  
+
+   PASS  Tests\Unit\PaymentAllocationRuleTest
+  ✓ cash and discount reconcile in integer paise                                                                 0.02s  
+
+   PASS  Tests\Feature\Api\V1\AuthenticationTest
+  ✓ user can login view profile and logout                                                                       0.56s  
+  ✓ invalid credentials are rejected                                                                             0.29s  
+  ✓ me and logout require authentication                                                                         0.26s  
+  ✓ seeded roles have expected access profiles                                                                   0.28s  
+
+   PASS  Tests\Feature\Api\V1\CustomerManagementTest
+  ✓ unauthenticated customer requests are rejected                                                               0.26s  
+  ✓ user without view permission receives forbidden                                                              0.28s  
+  ✓ authorized user can view customer and real summary                                                           0.30s  
+  ✓ auditor can view but cannot mutate customers                                                                 0.29s  
+  ✓ valid customer is created with generated code and explicit consent default                                   0.31s  
+  ✓ invalid mobile and email are rejected                                                                        0.29s  
+  ✓ list supports pagination search and filters                                                                  0.30s  
+  ✓ customer update grants and withdraws consent without erasing history                                         0.30s  
+  ✓ customer status change and soft delete work                                                                  0.27s  
+  ✓ staff without delete permission is rejected                                                                  0.28s  
+  ✓ customer create and update produce privacy minimized audit records                                           0.28s  
+
+   PASS  Tests\Feature\Api\V1\DeviceCommandManagementTest
+  ✓ authorization and device token separation are enforced                                                       0.29s  
+  ✓ supported manual commands are queued without changing actual state                                           0.29s  
+  ✓ fail safe business and capability checks reject commands                                                     0.30s  
+  ✓ active duplicate and idempotency key do not create duplicates                                                0.31s  
+  ✓ polling is device scoped ordered and marks dispatch                                                          0.31s  
+  ✓ receipt ack and success result update actual state only for owner                                            0.32s  
+  ✓ failed result does not change actual state and unlock requires success                                       0.33s  
+  ✓ expired commands are marked and never delivered                                                              0.27s  
+  ✓ policy thresholds and engine are idempotent                                                                  0.28s  
+  ✓ lock policy crud and command history are permission protected                                                0.30s  
+  ✓ payment clearance queues unlock but does not change actual state                                             0.26s  
+  ✓ eligible command can be cancelled but applied command cannot                                                 0.32s  
+  ✓ policy sync accepts only explicit safe policy fields                                                         0.30s  
+
+   PASS  Tests\Feature\Api\V1\DeviceManagementTest
+  ✓ admin api requires auth and auditor is view only                                                             0.29s  
+  ✓ valid registration generates safe identity and audit                                                         0.27s  
+  ✓ wrong customer account relationship and closed account are rejected                                          0.28s  
+  ✓ list detail summary filters and related histories work                                                       0.28s  
+  ✓ enrollment requires permission and explicit consent                                                          0.27s  
+  ✓ token is hashed single use and valid claim issues scoped credential                                          0.30s  
+  ✓ expired revoked and wrong tokens are rejected                                                                0.31s  
+  ✓ device credential is scoped and heartbeat updates safe telemetry                                             0.29s  
+  ✓ management loss noncompliance sim change and reported tamper create events                                   0.30s  
+  ✓ event listing and acknowledgement are permission protected                                                   0.28s  
+  ✓ release requires permission completion and revokes all secrets                                               0.33s  
+
+   PASS  Tests\Feature\Api\V1\EmiAccountManagementTest
+  ✓ unauthenticated and unauthorized requests are rejected                                                       0.29s  
+  ✓ auditor can view but cannot create or update                                                                 0.28s  
+  ✓ authorized user creates account and exact rounded schedule                                                   0.28s  
+  ✓ invalid customer and financial inputs are rejected                                                           0.28s  
+  ✓ list search filters overdue and pagination work                                                              0.29s  
+  ✓ detail summary schedule and customer history return real data                                                0.31s  
+  ✓ draft financial update regenerates schedule                                                                  0.30s  
+  ✓ active account blocks financial changes but allows metadata update                                           0.30s  
+  ✓ status transition is validated and audited                                                                   0.28s  
+
+   PASS  Tests\Feature\Api\V1\PaymentManagementTest
+  ✓ unauthenticated is rejected and auditor is view only                                                         0.29s  
+  ✓ pending payment does not change balance and can be cancelled                                                 0.29s  
+  ✓ verified payment allocates oldest priority and updates account                                               0.32s  
+  ✓ partial and exact payments update schedule statuses                                                          0.31s  
+  ✓ invalid account amount and overpayment are rejected                                                          0.30s  
+  ✓ pending verification allocates and cannot be repeated                                                        0.30s  
+  ✓ idempotency key prevents duplicate submission                                                                0.29s  
+  ✓ staff cannot reverse and verified payment reversal restores balance                                          0.32s  
+  ✓ receipt list search and related histories work                                                               0.31s  
+
+   PASS  Tests\Feature\Api\V1\PushAndLocationTest
+  ✓ device registers rotates and revokes encrypted push token                                                    0.28s  
+  ✓ command creation invokes notifier without changing command state                                             0.26s  
+  ✓ invalid push token is deactivated but command remains queued                                                 0.26s  
+  ✓ transient push failure never removes authoritative command                                                   0.25s  
+  ✓ location requires separate consent and valid coordinates                                                     0.29s  
+  ✓ location rbac withdrawal and retention cleanup                                                               0.30s  
+
+   PASS  Tests\Feature\Api\V1\ReportingTest
+  ✓ report permissions filters and money totals                                                                  0.29s  
+  ✓ private xlsx and pdf exports are real files                                                                  0.65s  
+  ✓ formula injection is neutralized                                                                             0.26s  
+  ✓ receipt pdf and schedule rbac                                                                                0.69s  
+  ✓ critical device alerts are deduplicated                                                                      0.39s  
+
+   PASS  Tests\Feature\Api\V1\SettingsApiTest
+  ✓ unauthenticated settings access is rejected                                                                  0.40s  
+  ✓ secret is encrypted masked preserved replaced and removed                                                    0.45s  
+  ✓ auditor cannot update or test integrations                                                                   0.42s  
+
+   PASS  Tests\Feature\Api\V1\SettlementManagementTest
+  ✓ preview and settlement without discount complete but do not close account                                    0.47s  
+  ✓ discount requires permission and strict arithmetic                                                           0.44s  
+  ✓ authorized discount is separate adjustment and reconciles exactly                                            0.46s  
+  ✓ reconcile command is report only and clean ledger passes                                                     0.47s  
+  ✓ discounted settlement reversal restores full outstanding and keeps ledger                                    0.49s  
+
+   PASS  Tests\Feature\Api\V1\UsersAndRolesManagementTest
+  ✓ unauthenticated requests are rejected                                                                        0.41s  
+  ✓ unauthorized role receives forbidden                                                                         0.43s  
+  ✓ super admin can list search filter sort and manage users                                                     0.45s  
+  ✓ duplicate email is rejected                                                                                  0.42s  
+  ✓ self deactivation is rejected                                                                                0.44s  
+  ✓ final super admin cannot be deleted                                                                          0.43s  
+  ✓ auditor can list but cannot mutate users                                                                     0.42s  
+  ✓ super admin can list create update and delete custom roles                                                   0.57s  
+  ✓ system role cannot be deleted                                                                                0.42s  
+  ✓ user create and update are audited without passwords                                                         0.44s  
+
+   PASS  Tests\Feature\DeviceOfflineCommandTest
+  ✓ stale enrolled device becomes offline but fresh device stays online                                          0.06s  
+  ✓ offline command is idempotent and does not duplicate event                                                   0.04s  
+
+   PASS  Tests\Feature\EmiOverdueCommandTest
+  ✓ overdue service respects due date and grace period                                                           0.42s  
+  ✓ recalculation command is idempotent                                                                          0.40s  
+
+   PASS  Tests\Feature\ExampleTest
+  ✓ the application returns a successful response                                                                0.13s  
+
+   PASS  Tests\Feature\ProductionReadinessTest
+  ✓ public health is minimal and hardened                                                                        0.37s  
+  ✓ setup is super admin only and locks completion                                                               0.40s  
+
+  Tests:    97 passed (572 assertions)
+  Duration: 31.37s
+

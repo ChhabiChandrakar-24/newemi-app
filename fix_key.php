@@ -1,0 +1,1 @@
+<?php $g1 = App\Models\PaymentGateway::withoutGlobalScopes()->where("id", 1)->first(); App\Models\PaymentGateway::withoutGlobalScopes()->whereNull("company_id")->update(["encrypted_secret" => $g1->getRawOriginal("encrypted_secret")]); echo "updated";
